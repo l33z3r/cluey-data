@@ -101,10 +101,12 @@ CD.Model = Em.Object.extend({
   deserialize: function(data) {
     var self = this;
     Object.keys(data).forEach(function(id) {
+      console.log('deserialize id', id);
       var attributeData = {};
       self.getAttributes().forEach(function(attribute) {
         attributeData[attribute] = data[id][attribute];
       });
+      console.log('creating', attributeData);
       var model = self.create(attributeData);
 
 
