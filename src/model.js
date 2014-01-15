@@ -84,18 +84,24 @@ CD.Model = Em.Object.extend({
     return relationships;
   },
 
-  find: function(ids) {
-    if(ids instanceof Array) {
-      return ids.map(this.find, this);
+  find: function(criteria) {
+    if(criteria instanceof Array) {
+      return criteria.map(this.find, this);
+    } else if(criteria instanceof Object) {
+      return this.all().filter(function(item) {
+        return Object.keys(criteria).every(function(c) {
+          return item.get(c) === criteria[c];
+        });
+      }, this);
     } else {
-      return CD.find(this, ids);
+      return CD.find(this, criteria);
     }
   },
   count: function() {
     return Object.keys(CD.list(this)).length;
   },
   ids: function() {
-    return Object.keys(CD.list(this))
+    return Object.keys(CD.list(this));
   },
   all: function() {
     return this.find(this.ids());

@@ -32,7 +32,7 @@ module('belongs_to.js', {
   }, teardown: function() {
     CD.clear();
   }
-})
+});
 
 test("getting and setting the belongsTo property", function() {
   cat.set('owner', person);
