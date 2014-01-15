@@ -13,5 +13,5 @@ gulp
 #### Production Build
 
 ```
-npm production
+gulp production
 ```
