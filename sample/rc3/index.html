@@ -1,0 +1,99 @@
+<html>
+<head>
+  <title>Ember RC3</title>
+  <script src="vendor/jquery-1.9.1.js"></script>
+  <script src="vendor/handlebars-1.0.0.rc3.js"></script>
+  <script src="vendor/ember-1.0.0.rc3.js"></script>
+  <script src="../../build/cluey-data.js"></script>
+</head>
+<body>
+
+  <script type="text/x-handlebars">
+     <h4>Hi</h4>
+
+     {{person.name}} {{person.city}}
+
+     {{person.id}}
+
+     <hr />
+     {{pet.name}} is owned by {{pet.owner.name}}
+
+     <hr />
+     {{input value=person.name}}
+
+     <button {{action 'update'}}>Update</button>
+     <button {{action 'petOwner'}}>Pet Owner</button>
+     <button {{action 'addPet'}}>Add Pet</button>
+
+     <hr />
+     person.id: {{person.id}}<br />
+     person.name: {{person.name}}<br />
+     person.pets: {{person.pets}}<br />
+     person.pets.length: {{person.pets.length}}<br />
+
+     {{#each pet in person.pets}}
+      {{pet.id}} : {{pet.name}} : {{pet.owner.name}} <br />
+     {{/each}}
+  </script>
+
+  <script>
+    App = Ember.Application.create();
+
+    App.Person = CD.Model.extend({
+      name: CD.attr(),
+      age: CD.attr(),
+      is_male: CD.attr(),
+      city: CD.attr({ defaultValue: 'Dublin' }),
+      pets: CD.hasMany('App.Pet', { key: 'pet_ids', inverse: 'owner' }),
+    });
+
+    App.Pet = CD.Model.extend({
+      name: CD.attr(),
+      type: CD.attr({ defaultValue: 'Cat' }),
+      owner: CD.belongsTo('App.Person', { key: 'owner_id', inverse: 'pets' })
+    });
+
+    App.ApplicationController = Em.Controller.extend({
+      person: null,
+      pet: null,
+      init: function() {
+        var person = App.Person.create({
+          name: 'gavin',
+          age: 22,
+          is_male: true
+        });
+        this.set('person', person);
+
+        var pet = App.Pet.create({
+          name: 'Sully'
+        });
+        this.set('pet', pet);
+      },
+      update: function() {
+        var person = this.get('person');
+        var pet = this.get('pet');
+        person.set('name', 'Gavin Joyce');
+        pet.set('owner', person);
+      },
+      addPet: function() {
+        var person = this.get('person');
+        var pet = App.Pet.create({
+          name: 'another',
+          owner: person
+        });
+      },
+      petOwner: function() {
+        var person = App.Person.create({
+          name: 'Sarah',
+          age: 25,
+          is_male: false
+        });
+
+        this.set('person', person);
+        this.get('pet').set('owner', person);
+        person.get('pets').pushObject(this.get('pet'));
+      }
+    });
+  </script>
+</body>
+</html>
