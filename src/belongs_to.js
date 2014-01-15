@@ -17,11 +17,11 @@ CD.belongsTo = function(type, options) {
 
     if (arguments.length > 1) { //an update
       var target = Em.get(meta.type);
-      var targetIsBelongsTo = target.metaForProperty(meta.options.inverse).kind === 'belongsTo';
 
       if(oldModel && oldModel !== model) {
         if(meta.options.inverse) {
           Em.run.next(this, function() {
+            var targetIsBelongsTo = target.metaForProperty(meta.options.inverse).kind === 'belongsTo';
             if(targetIsBelongsTo) {
               oldModel.set(meta.options.inverse, null);
             } else {
@@ -39,6 +39,7 @@ CD.belongsTo = function(type, options) {
 
         if(model && meta.options.inverse) {
           Em.run.next(this, function() {
+            var targetIsBelongsTo = target.metaForProperty(meta.options.inverse).kind === 'belongsTo';
             if(targetIsBelongsTo) {
               model.set(meta.options.inverse, this);
             } else {
