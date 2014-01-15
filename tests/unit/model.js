@@ -11,3 +11,18 @@ test("can filter by hash", function() {
   filtered = App.Person.find({ name: "Zoltan", age: 14 });
   equal(filtered.length, 0);
 });
+
+var lee, gavin;
+
+module('first()', {
+  setup: function() {
+    lee = App.Person.create({ name: 'Lee' });
+    gavin = App.Person.create({ name: 'Gavin' });
+  }, teardown: function() {
+    CD.clear();
+  }
+});
+
+test("returns first object when there is data", function() {
+  equal(App.Person.first(), lee);
+});

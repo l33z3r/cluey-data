@@ -98,7 +98,7 @@ CD.Model = Em.Object.extend({
     }
   },
 	first: function() {
-		this.all()[0]
+		return this.all()[0];
 	},
   count: function() {
     return Object.keys(CD.list(this)).length;
