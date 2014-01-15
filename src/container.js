@@ -41,8 +41,7 @@ CD = ClueyData = {
     return JSON.stringify(this.serialize());
   },
   fromJson: function(json) {
-    this.clear();
-    //TODO: GJ: deserialise
+    this.deserialize(JSON.parse(json));
   },
   clear: function() {
     //TODO: GJ: do we need to free objects so that they can be GCd?
