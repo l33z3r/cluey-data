@@ -24,4 +24,6 @@ test("attributes can be set", function() {
 
   equal(person1.get('name'), 'Tony');
   equal(person2.get('name'), 'Tony');
+
+  CD.clear();
 });
