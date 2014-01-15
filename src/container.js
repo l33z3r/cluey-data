@@ -2,7 +2,11 @@ CD = ClueyData = {
   data: {}, //a hash of model type arrays
   list: function(klass) {
     var key = String(klass);
-    return this.data[key] = (this.data[key] || {});
+    var list = this.data[key];
+    if(!list) {
+      list = this.data[key] =  {};
+    }
+    return list;
   },
   find: function(klass, id) {
     return this.list(klass)[id];
@@ -18,7 +22,7 @@ CD = ClueyData = {
     var self = this;
     this.classKeys().forEach(function(classKey) {
       var models = self.data[classKey];
-      var records = {}
+      var records = {};
 
       Object.keys(models).forEach(function(id) {
         records[id] = models[id].serialize();

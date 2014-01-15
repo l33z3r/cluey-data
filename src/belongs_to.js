@@ -12,7 +12,8 @@ CD.belongsTo = function(type, options) {
   }
 
   return Ember.computed(function(key, model, oldModel) {
-    var data = Em.get(this, '_data');
+    var data = Em.get(this, '_data'),
+        modelID;
     if (!data) {
       data = {};
       Em.set(this, '_data', data);
@@ -35,7 +36,7 @@ CD.belongsTo = function(type, options) {
       if(oldModel && oldModel === model) {
         //no need to update as the model is the same as the current one
       } else {
-        var modelID = model ? model.get('id') : null;
+        modelID = model ? model.get('id') : null;
         Em.set(this, internalKey, modelID);
 
         if(model) {
@@ -51,7 +52,7 @@ CD.belongsTo = function(type, options) {
 
       return model === undefined ? null : model;
     } else {
-      var modelID = data && Em.get(data, foreignKey);
+      modelID = data && Em.get(data, foreignKey);
       return modelID === undefined ? null : CD.find(meta.type, modelID);
     }
   }).property(internalKey).meta(meta);

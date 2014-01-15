@@ -18,4 +18,4 @@ CD.attr = function(options) {
 
     return dataValue;
   }).property('_data').meta({ isAttribute: true, options: options });
-}
+};

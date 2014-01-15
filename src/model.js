@@ -16,7 +16,7 @@ CD.Model = Em.Object.extend({
         relationships = this.constructor.getRelationships(),
         _data = this.get('_data');
 
-    for (key in properties) {
+    for (var key in properties) {
       serialized[key] = properties[key];
     }
 
@@ -55,8 +55,8 @@ CD.Model = Em.Object.extend({
       properties = {};
     }
 
-    if(!properties['id']) {
-      properties['id'] = this.generateID();
+    if(!properties.id) {
+      properties.id = this.generateID();
     }
 
     return this._super(properties);
@@ -97,7 +97,7 @@ CD.Model = Em.Object.extend({
       function(item) {
         return Object.keys(criteria).every(function(c) {
           return item.get(c) === criteria[c];
-        })
+        });
       }
     );
   },
@@ -105,7 +105,7 @@ CD.Model = Em.Object.extend({
     if(criteria) {
       return this.filter(criteria)[0];
     } else {
-  		return this.all()[0];
+      return this.all()[0];
     }
 	},
   count: function() {
@@ -133,6 +133,6 @@ CD.Model = Em.Object.extend({
         var meta = self.metaForProperty(relationship);
         model.set('_data.' + meta.relationshipKey, modelData[meta.relationshipKey]);
       });
-    })
+    });
   }
 });
