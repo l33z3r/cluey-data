@@ -66,3 +66,14 @@ asyncTest("setting a belongsTo that has an existing model correctly updates the 
     equal(newPerson.get('pets.firstObject'), cat);
   });
 });
+
+asyncTest("a belongsTo can represent a 1 to 1 relationship", function() {
+  var girlfriend = App.Person.create({ name: 'Sarah' });
+  person.set('partner', girlfriend);
+
+  Ember.run.next(function() {
+    start();
+    equal(person.get('partner'), girlfriend);
+    equal(girlfriend.get('partner'), person);
+  });
+});

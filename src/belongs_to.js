@@ -21,6 +21,7 @@ CD.belongsTo = function(type, options) {
     if (arguments.length > 1) { //an update
       if(oldModel && oldModel !== model) {
         Em.run.next(this, function() {
+          //TODO: GJ: handle 1-1 case
           oldModel.get(meta.options.inverse).removeObject(this);
         });
       }
@@ -33,7 +34,14 @@ CD.belongsTo = function(type, options) {
 
         if(model) {
           Em.run.next(this, function() {
-            model.get(meta.options.inverse).pushObject(this, true);
+            var target = Em.get(meta.type);
+            var targetRelationshipType = target.metaForProperty(meta.options.inverse).kind;
+
+            if(targetRelationshipType === 'belongsTo') {
+              model.set(meta.options.inverse, this);
+            } else {
+              model.get(meta.options.inverse).pushObject(this, true);
+            }
           });
         }
       }

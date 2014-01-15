@@ -40,6 +40,7 @@ asyncTest('CD.serialize() with single model', function() {
       "age": person.get('age'),
       "is_male": person.get('is_male'),
       "name": "Gavin",
+      "partner_id": null,
       "pet_ids": []
     }
 
@@ -69,6 +70,7 @@ asyncTest('CD.serialize() with related models', function() {
       "age": person.get('age'),
       "is_male": person.get('is_male'),
       "name": "Gavin",
+      "partner_id": null,
       "pet_ids": [pet.get('id')]
     };
 
