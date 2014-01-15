@@ -21,6 +21,7 @@
     App.Person = CD.Model.extend({
       name: CD.attr({ defaultValue: 'Alex' }),
       age: CD.attr({ defaultValue: 1 }),
+      score: CD.attr({ defaultValue: 0 }),
       is_male: CD.attr({ defaultValue: true }),
       pets: CD.hasMany('App.Pet', { key: 'pets', inverse: 'owner' }),
       partner: CD.belongsTo('App.Person', { key: 'partner', inverse: 'partner' })

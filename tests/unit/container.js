@@ -41,7 +41,8 @@ asyncTest('CD.serialize() with single model', function() {
       "is_male": person.get('is_male'),
       "name": "Gavin",
       "partner": null,
-      "pets": []
+      "pets": [],
+      "score": 0
     }
 
     deepEqual(CD.serialize(), expected, 'there should be one App.Person');
@@ -71,7 +72,8 @@ asyncTest('CD.serialize() with related models', function() {
       "is_male": person.get('is_male'),
       "name": "Gavin",
       "partner": null,
-      "pets": [pet.get('id')]
+      "pets": [pet.get('id')],
+      "score": 0
     };
 
     expected['App.Pet']['records'][pet.get('id')] = {

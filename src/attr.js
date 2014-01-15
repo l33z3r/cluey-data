@@ -12,7 +12,7 @@ CD.attr = function(options) {
       return value;
     }
 
-    if (!dataValue && options && options.defaultValue) {
+    if (!dataValue && options && typeof(options.defaultValue) !== undefined) {
       return Em.copy(options.defaultValue);
     }
 

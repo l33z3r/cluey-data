@@ -34,7 +34,8 @@ test("can filter by hash", function() {
 
 test("test default value serialization", function() {
   var person = App.Person.create();
-	equal(person.serialize().age, 1);
+  equal(person.serialize().age, 1);
+	equal(person.serialize().score, 0);
   CD.clear();
 });
 
