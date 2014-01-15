@@ -1,0 +1,20 @@
+{
+  "name": "cluey-data",
+  "description": "A simple in-memory Ember data store",
+  "directories": {
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:l33z3r/cluey-data.git"
+  },
+  "author": "Gavin Joyce & Lee Farrell",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp-util": "~2.2.10",
+    "gulp": "~3.3.4",
+    "gulp-concat": "~2.1.7",
+    "gulp-browserify": "~0.2.5"
+  },
+  "version": "0.0.1"
+}
