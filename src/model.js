@@ -65,6 +65,7 @@ CD.Model = Em.Object.extend({
     return Math.random().toString(32).slice(2).substr(0,6);
   },
   getAttributes: function() {
+    this.proto(); // force class "compilation" if it hasn't been done.
     var attributes = this._attributes || [];
 
     if (typeof this.superclass.getAttributes === 'function') {
@@ -75,6 +76,7 @@ CD.Model = Em.Object.extend({
   },
 
   getRelationships: function() {
+    this.proto(); // force class "compilation" if it hasn't been done.
     var relationships = this._relationships || [];
     if (typeof this.superclass.getRelationships === 'function') {
       relationships = this.superclass.getRelationships().concat(relationships);
@@ -98,15 +100,15 @@ CD.Model = Em.Object.extend({
   all: function() {
     return this.find(this.ids());
   },
-  deserialize: function(data) {
+  deserialize: function(models) {
     var self = this;
-    Object.keys(data).forEach(function(id) {
-      console.log('deserialize id', id);
+    Object.keys(models).forEach(function(id) {
+      var modelData = models[id];
+
       var attributeData = {};
       self.getAttributes().forEach(function(attribute) {
-        attributeData[attribute] = data[id][attribute];
+        attributeData[attribute] = modelData[id][attribute];
       });
-      console.log('creating', attributeData);
       var model = self.create(attributeData);
 
 
