@@ -99,19 +99,17 @@ asyncTest('CD.deserialize() models without relationships', function() {
   });
 });
 
-// asyncTest('CD.deserialize() models with relationships', function() {
-//   var gavin = App.Person.create({ name: 'Gavin' });
-//   var sarah = App.Person.create({ name: 'Sarah', partner: gavin });
-//   var pet = App.Pet.create({ name: 'Sully', owner: gavin });
+asyncTest('CD.deserialize() models with relationships', function() {
+  var gavin = App.Person.create({ name: 'Gavin' });
+  var sarah = App.Person.create({ name: 'Sarah', partner: gavin });
+  var pet = App.Pet.create({ name: 'Sully', owner: gavin });
 
-//   // Ember.run.next(function() {
-//     var expected = CD.serialize();
-//     CD.clear();
-//     CD.deserialize(expected);
+  var expected = CD.serialize();
+  CD.clear();
+  CD.deserialize(expected);
 
-//     Ember.run.next(function() {
-//       start();
-//       deepEqual(CD.serialize(), expected);
-//     });
-//   // });
-// });
+  Ember.run.next(function() {
+    start();
+    deepEqual(CD.serialize(), expected);
+  });
+});

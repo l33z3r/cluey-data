@@ -117,8 +117,11 @@ CD.Model = Em.Object.extend({
       });
       var model = self.create(attributeData);
 
-
-      //TODO: GJ: deserialize relationships too
+      self.getRelationships().forEach(function(relationship) {
+        //TODO: GJ: buffer properties in hash and updateProperties
+        var meta = self.metaForProperty(relationship);
+        model.set('_data.' + meta.relationshipKey, modelData[meta.relationshipKey]);
+      });
     })
   },
 });
