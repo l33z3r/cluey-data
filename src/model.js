@@ -6,6 +6,18 @@ CD.Model = Em.Object.extend({
   save: function() {
     CD.save(this);
   },
+  delete: function() {
+    var self = this;
+    this.constructor.getRelationships().forEach(function(relationship) {
+      var meta = self.constructor.metaForProperty(relationship);
+      console.log('TODO: update relationships', relationship, meta);
+
+      //if belongsTo: remove item from array
+      //if hasMany: set inverse to null
+    });
+
+    this.destroy();
+  },
   toJson: function() {
     return JSON.stringify(this.serialize());
   },

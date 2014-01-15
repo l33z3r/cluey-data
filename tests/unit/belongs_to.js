@@ -10,16 +10,6 @@ test("requires an options.key", function() {
   );
 });
 
-test("requires an options.inverse", function() {
-  throws(
-    function() {
-      var Pet = CD.Model.extend({
-        owner: CD.belongsTo('Person', { key: 'owner_id' })
-      });
-    }
-  );
-});
-
 var person, cat;
 
 module('belongs_to.js', {
@@ -66,6 +56,10 @@ asyncTest("setting a belongsTo that has an existing model correctly updates the 
     equal(newPerson.get('pets.firstObject'), cat);
   });
 });
+
+// asyncTest("a belongsTo relationship with no inverse can be set", function() {
+//   //pending
+// });
 
 asyncTest("a belongsTo can represent a 1 to 1 relationship", function() {
   var girlfriend = App.Person.create({ name: 'Sarah' });

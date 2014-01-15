@@ -48,7 +48,7 @@ CD = ClueyData = {
     this.deserialize(JSON.parse(json));
   },
   clear: function() {
-    //TODO: GJ: do we need to free objects so that they can be GCd?
+    //TODO: GJ: call destroy on all objects so that they can be GCd : http://emberjs.com/api/#method_destroy
     this.data = {};
   }
 };

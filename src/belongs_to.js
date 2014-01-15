@@ -24,13 +24,15 @@ CD.belongsTo = function(type, options) {
       var targetIsBelongsTo = target.metaForProperty(meta.options.inverse).kind === 'belongsTo';
 
       if(oldModel && oldModel !== model) {
-        Em.run.next(this, function() {
-          if(targetIsBelongsTo) {
-            oldModel.set(meta.options.inverse, null);
-          } else {
-            oldModel.get(meta.options.inverse).removeObject(this);
-          }
-        });
+        if(meta.options.inverse) {
+          Em.run.next(this, function() {
+            if(targetIsBelongsTo) {
+              oldModel.set(meta.options.inverse, null);
+            } else {
+              oldModel.get(meta.options.inverse).removeObject(this);
+            }
+          });
+        }
       }
 
       if(oldModel && oldModel === model) {
@@ -39,7 +41,7 @@ CD.belongsTo = function(type, options) {
         modelID = model ? model.get('id') : null;
         Em.set(this, internalKey, modelID);
 
-        if(model) {
+        if(model && meta.options.inverse) {
           Em.run.next(this, function() {
             if(targetIsBelongsTo) {
               model.set(meta.options.inverse, this);

@@ -30,4 +30,24 @@ test("returns first object when there is data", function() {
 
 test("can filter by hash", function() {
   equal(App.Person.first({ name: 'Gavin' }), gavin);
-})
+});
+
+var sully;
+
+module('delete()', {
+  teardown: function() {
+    CD.clear();
+  }
+});
+
+// asyncTest("returns first object when there is data", function() {
+//   var gavin = App.Person.create({ name: 'Gavin'});
+//   var sully = App.Pet.create({ name: 'Sully', owner: gavin });
+//   sully.delete();
+
+//   Em.run.next(function() {
+//     start();
+//     equal(gavin.get('pets.length'), 0);
+//   });
+// });
+
