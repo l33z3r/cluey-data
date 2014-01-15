@@ -19,10 +19,16 @@ CD.belongsTo = function(type, options) {
     }
 
     if (arguments.length > 1) { //an update
+      var target = Em.get(meta.type);
+      var targetIsBelongsTo = target.metaForProperty(meta.options.inverse).kind === 'belongsTo';
+
       if(oldModel && oldModel !== model) {
         Em.run.next(this, function() {
-          //TODO: GJ: handle 1-1 case
-          oldModel.get(meta.options.inverse).removeObject(this);
+          if(targetIsBelongsTo) {
+            oldModel.set(meta.options.inverse, null);
+          } else {
+            oldModel.get(meta.options.inverse).removeObject(this);
+          }
         });
       }
 
@@ -34,10 +40,7 @@ CD.belongsTo = function(type, options) {
 
         if(model) {
           Em.run.next(this, function() {
-            var target = Em.get(meta.type);
-            var targetRelationshipType = target.metaForProperty(meta.options.inverse).kind;
-
-            if(targetRelationshipType === 'belongsTo') {
+            if(targetIsBelongsTo) {
               model.set(meta.options.inverse, this);
             } else {
               model.get(meta.options.inverse).pushObject(this, true);

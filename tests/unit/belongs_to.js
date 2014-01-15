@@ -77,3 +77,15 @@ asyncTest("a belongsTo can represent a 1 to 1 relationship", function() {
     equal(girlfriend.get('partner'), person);
   });
 });
+
+asyncTest("updating a 1-1 belongsTo relationship clears the original related model's relationship", function() {
+  var girlfriend = App.Person.create({ name: 'Sarah' });
+  person.set('partner', girlfriend);
+  person.set('partner', null);
+
+  Ember.run.next(function() {
+    start();
+    equal(person.get('partner'), null);
+    equal(girlfriend.get('partner'), null);
+  });
+});
