@@ -22,14 +22,14 @@
       name: CD.attr({ defaultValue: 'Alex' }),
       age: CD.attr({ defaultValue: 1 }),
       is_male: CD.attr({ defaultValue: true }),
-      pets: CD.hasMany('App.Pet', { key: 'pet_ids', inverse: 'owner' }),
-      partner: CD.belongsTo('App.Person', { key: 'partner_id', inverse: 'partner' })
+      pets: CD.hasMany('App.Pet', { key: 'pets', inverse: 'owner' }),
+      partner: CD.belongsTo('App.Person', { key: 'partner', inverse: 'partner' })
     });
 
     App.Pet = CD.Model.extend({
       name: CD.attr(),
-      owner: CD.belongsTo('App.Person', { key: 'owner_id', inverse: 'pets' }),
-      tags: CD.hasMany('App.Tag', { key: 'tag_ids' })
+      owner: CD.belongsTo('App.Person', { key: 'owner', inverse: 'pets' }),
+      tags: CD.hasMany('App.Tag', { key: 'tags' })
     });
 
     App.Tag = CD.Model.extend({

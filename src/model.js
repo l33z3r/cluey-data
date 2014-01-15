@@ -101,7 +101,12 @@ CD.Model = Em.Object.extend({
   deserialize: function(data) {
     var self = this;
     Object.keys(data).forEach(function(id) {
-      var model = self.create(data[id]);
+      var attributeData = {};
+      self.getAttributes().forEach(function(attribute) {
+        attributeData[attribute] = data[id][attribute];
+      });
+      var model = self.create(attributeData);
+
 
       //TODO: GJ: deserialize relationships too
     })
