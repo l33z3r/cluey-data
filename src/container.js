@@ -41,7 +41,6 @@ CD = ClueyData = {
     return JSON.stringify(this.serialize());
   },
   fromJson: function(json) {
-    // console.log('load json...', json);
     this.clear();
     //TODO: GJ: deserialise
   },

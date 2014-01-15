@@ -20,7 +20,7 @@ CD.ModelArray = Em.ArrayProxy.extend({
     if(!content.contains(id)) {
       content.pushObject(id);
 
-      if(!skipInverseUpdate) {
+      if(inverse && !skipInverseUpdate) {
         Em.run.next(this, function() {
           model.set(inverse, parent);
         });

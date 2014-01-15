@@ -8,7 +8,7 @@ gulp.task('scripts', function() {
   gulp.src(['src/main.js'])
       .pipe(browserify())
       .pipe(concat('cluey-data.js'))
-      .pipe(uglify())
+      // .pipe(uglify())
       .pipe(gulp.dest('build'));
 })
 

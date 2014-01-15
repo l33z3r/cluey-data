@@ -28,7 +28,12 @@
 
     App.Pet = CD.Model.extend({
       name: CD.attr(),
-      owner: CD.belongsTo('App.Person', { key: 'owner_id', inverse: 'pets' })
+      owner: CD.belongsTo('App.Person', { key: 'owner_id', inverse: 'pets' }),
+      tags: CD.hasMany('App.Tag', { key: 'tag_ids' })
+    });
+
+    App.Tag = CD.Model.extend({
+      name: CD.attr()
     });
   </script>
 
