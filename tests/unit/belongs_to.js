@@ -1,10 +1,20 @@
 module("belongs_to.js");
 
-test("requires a key", function() {
+test("requires an options.key", function() {
   throws(
     function() {
       var Pet = CD.Model.extend({
-        owner: CD.belongsTo('Person')
+        owner: CD.belongsTo('Person', { inverse: 'owner' })
+      });
+    }
+  );
+});
+
+test("requires an options.inverse", function() {
+  throws(
+    function() {
+      var Pet = CD.Model.extend({
+        owner: CD.belongsTo('Person', { key: 'owner_id' })
       });
     }
   );

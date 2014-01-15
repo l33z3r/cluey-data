@@ -5,6 +5,14 @@ CD.hasMany = function(type, options) {
   var meta = { type: type, isRelationship: true, options: options, kind: 'hasMany' },
       arrayKey = options.key;
 
+  if(!options.key) {
+    throw 'A CD.hasMany relationship must specify a key (' + type + ')';
+  }
+
+  if(!options.inverse) {
+    throw 'A CD.hasMany relationship must specify an inverse (' + type + ')';
+  }
+
   return Ember.computed(function(key, value, oldValue) {
     var data = Em.get(this, '_data');
     if (!data) {

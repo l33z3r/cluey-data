@@ -7,6 +7,10 @@ CD.belongsTo = function(type, options) {
     throw 'A CD.belongsTo relationship must specify a key (' + type + ')';
   }
 
+  if(!options.inverse) {
+    throw 'A CD.belongsTo relationship must specify an inverse (' + type + ')';
+  }
+
   return Ember.computed(function(key, model, oldModel) {
     var data = Em.get(this, '_data');
     if (!data) {
