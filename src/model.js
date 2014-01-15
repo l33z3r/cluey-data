@@ -83,22 +83,30 @@ CD.Model = Em.Object.extend({
     }
     return relationships;
   },
-
   find: function(criteria) {
     if(criteria instanceof Array) {
       return criteria.map(this.find, this);
     } else if(criteria instanceof Object) {
-      return this.all().filter(function(item) {
-        return Object.keys(criteria).every(function(c) {
-          return item.get(c) === criteria[c];
-        });
-      }, this);
+      return this.filter(criteria);
     } else {
       return CD.find(this, criteria);
     }
   },
-	first: function() {
-		return this.all()[0];
+  filter: function(criteria) {
+    return this.all().filter(
+      function(item) {
+        return Object.keys(criteria).every(function(c) {
+          return item.get(c) === criteria[c];
+        })
+      }
+    );
+  },
+	first: function(criteria) {
+    if(criteria) {
+      return this.filter(criteria)[0];
+    } else {
+  		return this.all()[0];
+    }
 	},
   count: function() {
     return Object.keys(CD.list(this)).length;
@@ -126,5 +134,5 @@ CD.Model = Em.Object.extend({
         model.set('_data.' + meta.relationshipKey, modelData[meta.relationshipKey]);
       });
     })
-  },
+  }
 });
