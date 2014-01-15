@@ -40,7 +40,7 @@ module('delete()', {
   }
 });
 
-// asyncTest("returns first object when there is data", function() {
+// asyncTest("....", function() {
 //   var gavin = App.Person.create({ name: 'Gavin'});
 //   var sully = App.Pet.create({ name: 'Sully', owner: gavin });
 //   sully.delete();
