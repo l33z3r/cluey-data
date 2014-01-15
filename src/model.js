@@ -107,7 +107,7 @@ CD.Model = Em.Object.extend({
 
       var attributeData = {};
       self.getAttributes().forEach(function(attribute) {
-        attributeData[attribute] = modelData[id][attribute];
+        attributeData[attribute] = modelData[attribute];
       });
       var model = self.create(attributeData);
 
