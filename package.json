@@ -14,7 +14,8 @@
     "gulp-util": "~2.2.10",
     "gulp": "~3.3.4",
     "gulp-concat": "~2.1.7",
-    "gulp-browserify": "~0.2.5"
+    "gulp-browserify": "~0.2.5",
+    "gulp-uglify": "~0.1.0"
   },
   "version": "0.0.1"
 }
