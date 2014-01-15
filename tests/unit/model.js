@@ -32,22 +32,10 @@ test("can filter by hash", function() {
   equal(App.Person.first({ name: 'Gavin' }), gavin);
 });
 
-var defaultValPerson;
-
-module('test attr with default val', {
-	setup: function() {
-		defaultValPerson = App.Person.create()
-	},
-	teardown: function() {
-		CD.clear()
-	}
-});
-
 test("test default value serialization", function() {
-	console.log("here ", defaultValPerson);
-	defaultValPerson.serialize();
-	console.log("here")
-	equal(defaultValPerson.serialize().age, -1)
+  var person = App.Person.create();
+	equal(person.serialize().age, 1);
+  CD.clear();
 });
 
 var sully;

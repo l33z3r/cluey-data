@@ -26,7 +26,7 @@ CD.Model = Em.Object.extend({
         attributes = this.constructor.getAttributes(),
         properties = attributes ? this.getProperties(attributes) : {},
         relationships = this.constructor.getRelationships(),
-        _data = this.get('_data');
+        _data = this.get('_data') || {};
 
     for (var key in properties) {
       serialized[key] = properties[key];
