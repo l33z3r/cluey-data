@@ -82,3 +82,20 @@ asyncTest('CD.serialize() with related models', function() {
   });
 });
 
+asyncTest('CD.deserialize() models without relationships', function() {
+  var person = App.Person.create({ name: 'Gavin' });
+  var pet = App.Pet.create({ name: 'Sully' });
+
+  Ember.run.next(function() {
+    var expected = CD.serialize();
+    CD.clear();
+    CD.deserialize(expected);
+
+    Ember.run.next(function() {
+      start();
+      ok(true);
+      deepEqual(CD.serialize(), expected);
+    });
+  });
+});
+

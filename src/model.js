@@ -54,10 +54,10 @@ CD.Model = Em.Object.extend({
     if(!properties) {
       properties = {};
     }
-    // console.log('CREATE...', properties);
 
-    properties['id'] = this.generateID();
-    // console.log('CREATE...', properties);
+    if(!properties['id']) {
+      properties['id'] = this.generateID();
+    }
 
     return this._super(properties);
   },
@@ -97,5 +97,13 @@ CD.Model = Em.Object.extend({
   },
   all: function() {
     return this.find(this.ids());
-  }
+  },
+  deserialize: function(data) {
+    var self = this;
+    Object.keys(data).forEach(function(id) {
+      var model = self.create(data[id]);
+
+      //TODO: GJ: deserialize relationships too
+    })
+  },
 });

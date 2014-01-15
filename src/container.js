@@ -31,7 +31,11 @@ CD = ClueyData = {
     return serialized;
   },
   deserialize: function(data) {
-    console.log('TODO: GJ: ...');
+    this.clear();
+    Object.keys(data).forEach(function(classKey) {
+      var klass = Em.get(classKey);
+      klass.deserialize(data[classKey].records);
+    });
   },
   toJson: function() {
     return JSON.stringify(this.serialize());
