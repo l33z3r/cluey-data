@@ -9,3 +9,9 @@ npm install -g gulp
 npm install
 gulp
 ```
+
+#### Production Build
+
+```
+npm production
+```
