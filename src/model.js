@@ -33,8 +33,8 @@ CD.Model = Em.Object.extend({
     }
 
     for(var i = 0; i < relationships.length; i++) {
-      meta = this.constructor.metaForProperty(relationships[i]);
-      relationshipDataKey = meta.options.key || key;
+      var meta = this.constructor.metaForProperty(relationships[i]);
+      var relationshipDataKey = meta.options.key || key;
 
       var value = _data[relationshipDataKey];
       if (value === undefined) {
