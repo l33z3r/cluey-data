@@ -14,6 +14,9 @@ CD = ClueyData = {
   save: function(model) {
     this.list(model.constructor)[model.get('id')] = model;
   },
+  delete: function(model) {
+    delete this.list(model.constructor)[model.get('id')];
+  },
   classKeys: function() {
     return Object.keys(this.data);
   },

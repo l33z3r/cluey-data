@@ -10,12 +10,32 @@ CD.Model = Em.Object.extend({
     var self = this;
     this.constructor.getRelationships().forEach(function(relationship) {
       var meta = self.constructor.metaForProperty(relationship);
-      console.log('TODO: update relationships', relationship, meta);
 
-      //if belongsTo: remove item from array
-      //if hasMany: set inverse to null
+			if(meta.options.inverse) {
+				
+	      target = Em.get(meta.type);
+		
+				targetIsBelongsTo = target.metaForProperty(meta.options.inverse).kind === "belongsTo";
+		
+				if(targetIsBelongsTo) {
+					targetInstanceArray = self.get(meta.options.key);
+					
+					if(targetInstanceArray != null) {
+						tia = targetInstanceArray.toArray()
+						for(i=0; i<tia.get('length'); i++) {
+							tia[i].set(meta.options.inverse, null);
+						}	
+				  }
+				} else {
+					targetInstance = self.get(meta.options.key);
+					targetHasManyArray = targetInstance.get(meta.options.inverse);
+					targetHasManyArray.removeObject(self);
+				}
+					
+			}
     });
-
+		
+		CD.delete(this);
     this.destroy();
   },
   toJson: function() {

@@ -47,14 +47,15 @@ module('delete()', {
   }
 });
 
-// asyncTest("....", function() {
-//   var gavin = App.Person.create({ name: 'Gavin'});
-//   var sully = App.Pet.create({ name: 'Sully', owner: gavin });
-//   sully.delete();
+asyncTest("test delete", function() {
+  var gavin = App.Person.create({ name: 'Gavin'});
+  var sully = App.Pet.create({ name: 'Sully', owner: gavin });
+  sully.delete();
 
-//   Em.run.next(function() {
-//     start();
-//     equal(gavin.get('pets.length'), 0);
-//   });
-// });
+  Em.run.next(function() {
+    start();
+		debugger;
+    equal(gavin.get('pets.length'), 0);
+  });
+});
 
