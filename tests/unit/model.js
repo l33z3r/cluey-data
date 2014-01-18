@@ -50,12 +50,12 @@ module('delete()', {
 asyncTest("test delete", function() {
   var gavin = App.Person.create({ name: 'Gavin'});
   var sully = App.Pet.create({ name: 'Sully', owner: gavin });
-  sully.delete();
+  
 
   Em.run.next(function() {
+		sully.delete();
     start();
-		debugger;
-    equal(gavin.get('pets.length'), 0);
+		equal(gavin.get('pets.length'), 0);
   });
 });
 
