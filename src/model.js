@@ -29,8 +29,11 @@ CD.Model = Em.Object.extend({
 				} else {
 					console.log("removing from array")
 					targetInstance = self.get(meta.options.key);
-					targetHasManyArray = targetInstance.get(meta.options.inverse);
-					targetHasManyArray.removeObject(self);
+					
+					if(targetInstance != null) {
+						targetHasManyArray = targetInstance.get(meta.options.inverse);
+						targetHasManyArray.removeObject(self);	
+					}					
 				}
 					
 			}
