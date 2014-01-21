@@ -16,18 +16,27 @@ CD.Model = Em.Object.extend({
 	      target = Em.get(meta.type);
 		
 				targetIsBelongsTo = target.metaForProperty(meta.options.inverse).kind === "belongsTo";
-		
+		    
 				if(targetIsBelongsTo) {
-					targetInstanceArray = self.get(meta.options.key);
+					targetBelongsToIsOneToMany = meta.kind === "hasMany";
 					
-					if(targetInstanceArray != null) {
-						tia = targetInstanceArray.toArray()
-						for(i=0; i<tia.get('length'); i++) {
-							tia[i].set(meta.options.inverse, null);
-						}	
-				  }
+					if(targetBelongsToIsOneToMany) {
+						targetInstanceArray = self.get(meta.options.key);
+					
+						if(targetInstanceArray != null) {
+							tia = targetInstanceArray.toArray()
+							for(i=0; i<tia.get('length'); i++) {
+								tia[i].set(meta.options.inverse, null);
+							}	
+					  }
+					} else {
+						targetInstance = self.get(meta.options.key);
+						
+						if(targetInstance != null) {
+						  targetInstance.set(meta.options.inverse, null);	
+						}
+					}	
 				} else {
-					console.log("removing from array")
 					targetInstance = self.get(meta.options.key);
 					
 					if(targetInstance != null) {

@@ -43,8 +43,15 @@ CD = ClueyData = {
     });
     return serialized;
   },
-  deserialize: function(data) {
-    this.clear();
+  deserialize: function(data, clear) {
+		if(typeof(clear) == "undefined") {
+      clear = true;
+    }
+
+    if(clear) {
+      this.clear();
+    }
+
     Object.keys(data).forEach(function(classKey) {
       var klass = Em.get(classKey);
       klass.deserialize(data[classKey].records);
