@@ -9,7 +9,13 @@ CD = ClueyData = {
     return list;
   },
   find: function(klass, id) {
-    return this.list(klass)[id];
+		res = this.list(klass)[id];
+		
+		if(typeof(res) === "undefined") {
+			return null;
+		} else {
+			return res;
+		}
   },
   save: function(model) {
     this.list(model.constructor)[model.get('id')] = model;
