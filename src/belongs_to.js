@@ -52,7 +52,12 @@ CD.belongsTo = function(type, options) {
       return model === undefined ? null : model;
     } else {
       modelID = data && Em.get(data, foreignKey);
-      return modelID === undefined ? null : CD.find(meta.type, modelID);
+			
+			if(modelID === undefined || modelID === null) {
+				return null;
+			} else {
+				return CD.find(meta.type, modelID);
+			}
     }
   }).property(internalKey).meta(meta);
 };
